@@ -34,62 +34,71 @@ function fillZeros(number: number, length: number) {
 }
 
 async function run() {
-    let doc = new PDFDocument({
-        size: "A4",
-        margins: {
-            top: 50,
-            bottom: 50,
-            left: 0,
-            right: 0
-        }}
-    );
-
-    let inicialPDFindex = 0;
-
-    doc.pipe(fs.createWriteStream(`./pdfs/de-${inicialPDFindex}-a-${inicialPDFindex+39}.pdf`));
-
-
-    let imagesPerPages = 0;
-
     // for(let i = 0; i < 1000; i += 2) {
     //     const imageName = `./images/de-${i}-a-${i+1}.png`;
     //     const text = fillZeros(i, 3) + " - " + fillZeros(i+1, 3);
     //     await createImage(imageName, text);
     // }
 
+    let inicialPDFindex = 0;
+    let imagesPerPages = 0;
+
+    const docs = [
+        new PDFDocument({
+            size: "A4",
+            margins: {
+                top: 50,
+                bottom: 50,
+                left: 0,
+                right: 0
+            }}
+        )
+    ]
+    docs[docs.length - 1].pipe(fs.createWriteStream(`./pdfs/de-${inicialPDFindex}-a-${inicialPDFindex+39}.pdf`));
+
+
     for(let i = 0; i < 1000; i+=2) {
         if (i % 40 === 0 && i > 0) {
-            doc.end();
-            break;
-            // doc = new PDFDocument({
-            //     size: "A4",
-            //     margins: {
-            //         top: 50,
-            //         bottom: 50,
-            //         left: 0,
-            //         right: 0
-            //     }});
-            // inicialPDFindex = i;
-            // imagesPerPages = 0;
-            // doc.pipe(fs.createWriteStream(`./pdfs/de-${inicialPDFindex}-a-${inicialPDFindex+39}.pdf`));
+            docs[docs.length - 1].end();
+            // break;
+
+            docs.push(
+                new PDFDocument({
+                    size: "A4",
+                    margins: {
+                        top: 50,
+                        bottom: 50,
+                        left: 0,
+                        right: 0
+                    }}
+                )
+            )
+            inicialPDFindex = i;
+            imagesPerPages = 0;
+            docs[docs.length - 1].pipe(fs.createWriteStream(`./pdfs/de-${inicialPDFindex}-a-${inicialPDFindex+39}.pdf`));
+
         }
         const imageName = `./images/de-${i}-a-${i+1}.png`;
-        doc.image(imageName, {
+        docs[docs.length - 1].image(imageName, {
             scale: 0.50,
             align: 'left',
             valign: 'center'
         } as any);
 
-        doc.text("  ");
+        docs[docs.length - 1].text("  ");
         ++imagesPerPages;
+
+        console.log("Added image")
 
 
         if (imagesPerPages === 2) {
             // add new line to doc
             imagesPerPages = 0;
 
-            if (i % 40 === 0 && i > 0) {
-                doc.addPage({
+            if (i % 38 !== 0) {
+                console.log("new page")
+                console.log("=====================")
+                docs[docs.length - 1].addPage({
                     size: "A4",
                     margins: {
                         top: 50,
@@ -101,6 +110,8 @@ async function run() {
             }
         }
     }
+
+    docs[docs.length - 1].end();
 
 }
 
