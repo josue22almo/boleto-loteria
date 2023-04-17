@@ -1,0 +1,37 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "es2019",
+    "forceConsistentCasingInFileNames": true,
+    "noImplicitReturns": true,
+    "strict": true,
+    "strictNullChecks": true,
+    "preserveConstEnums": true,
+    "sourceMap": true,
+    "declaration": false,
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "stripInternal": true,
+    "outDir": "dist",
+    "allowJs": true,
+    "lib": [
+      "es2019",
+      "dom"
+    ],
+    "typeRoots": [
+      "node_modules/@types",
+    ],
+    "noStrictGenericChecks": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+  },
+  "exclude": [
+    "node_modules",
+    "dist",
+    "**/*.js",
+  ],
+  "include": [
+    "test/**/*.ts",
+    "src/**/*.ts",
+  ],
+}

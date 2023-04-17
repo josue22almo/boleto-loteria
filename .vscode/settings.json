@@ -1,0 +1,24 @@
+{
+  ////////////////////// mocha explorer
+  "mochaExplorer.env": {
+    "NODE_ENV": "test",
+  },
+  "mochaExplorer.require": [
+    "ts-node/register",
+  ],
+  "mochaExplorer.timeout": 60000,
+  "testExplorer.codeLens": true,
+  "testExplorer.gutterDecoration": true,
+  "testExplorer.sort": "byLocationWithSuitesFirst",
+  "testExplorer.mergeSuites": true,
+  "testExplorer.hideEmptyLog": false,
+  "testExplorer.errorDecoration": true,
+  "mochaExplorer.fullTrace": true,
+  "testExplorer.showOnRun": true,
+  "mochaExplorer.exit": true,
+  "mochaExplorer.files": "test/**/*.test.ts",
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "plantuml.diagramsRoot": "docs/src",
+  "plantuml.exportOutDir": "docs/output",
+  "plantuml.exportSubFolder": false
+}

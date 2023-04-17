@@ -1,0 +1,215 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "cloudcode",
+      "language": "Node",
+      "request": "attach",
+      "debugPort": 9229,
+      "localRoot": "${workspaceFolder}",
+      "remoteRoot": "/app",
+      "name": "Attach App on Kubernetes Cluster: NodeJS",
+      "podSelector": {
+        "app": "escher-microservice-skeleton"
+      }
+    },
+    {
+      "name": "Attach to running local process",
+      "type": "node",
+      "request": "attach",
+      "port": 9230,
+      "localRoot": "${workspaceFolder}",
+      "remoteRoot": "/app",
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Mocha All",
+      "program": "${workspaceFolder}/node_modules/mocha/bin/_mocha",
+      "args": [
+        "-r",
+        "ts-node/register",
+        "--timeout",
+        "999999",
+        "--colors",
+        "--exit",
+        "${workspaceFolder}/test/**/*.test.ts",
+      ],
+      "env": {
+        "NODE_ENV": "test",
+        "RABBIT_URI": "amqp://guest:guest@localhost",
+      },
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen",
+      "protocol": "inspector"
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Mocha All Unit",
+      "program": "${workspaceFolder}/node_modules/mocha/bin/_mocha",
+      "args": [
+        "-r",
+        "ts-node/register",
+        "--timeout",
+        "999999",
+        "--colors",
+        "--exit",
+        "${workspaceFolder}/test/contexts/**/*.test.ts",
+      ],
+      "env": {
+        "NODE_ENV": "test",
+        "RABBIT_URI": "amqp://guest:guest@localhost",
+      },
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen",
+      "protocol": "inspector"
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Mocha glob",
+      "program": "${workspaceFolder}/node_modules/mocha/bin/_mocha",
+      "args": [
+        "-r",
+        "ts-node/register",
+        "--timeout",
+        "999999",
+        "--colors",
+        "--exit",
+        "-g",
+        "${selectedText}",
+      ],
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen",
+      "protocol": "inspector",
+      "env": {
+        "NODE_ENV": "test",
+        "RABBIT_URI": "amqp://guest:guest@localhost",
+      }
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Mocha Acceptance",
+      "program": "${workspaceFolder}/node_modules/mocha/bin/_mocha",
+      "args": [
+        "-r",
+        "ts-node/register",
+        "--timeout",
+        "999999",
+        "--colors",
+        "--exit",
+        "${workspaceFolder}/test/apps/**/*.test.ts",
+      ],
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen",
+      "protocol": "inspector",
+      "env": {
+        "NODE_ENV": "acceptance",
+        "RABBIT_URI": "amqp://guest:guest@localhost",
+      }
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Launch App",
+      "runtimeArgs": [
+        "-r",
+        "ts-node/register"
+      ],
+      "args": [
+        "${workspaceFolder}/src/apps/index.ts",
+        "--timeout",
+        "999999",
+        "--colors"
+      ],
+      "env": {
+        "NODE_ENV": "development",
+        "PORT": "3333",
+        "HEALTH_PORT": "5555"
+      },
+      "console": "integratedTerminal",
+      "protocol": "inspector"
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Coverage",
+      "program": "",
+      "args": [
+        "${workspaceFolder}/node_modules/nyc/bin/nyc",
+        "${workspaceFolder}/node_modules/mocha/bin/_mocha"
+      ],
+      "skipFiles": [
+        "${workspaceFolder}/node_modules/**/*.js"
+      ],
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen",
+      "protocol": "inspector"
+    },
+    {
+      "type": "node",
+      "name": "Mocha Sidebar",
+      "request": "launch",
+      "runtimeArgs": [
+        "${workspaceFolder}/node_modules/mocha/bin/_mocha",
+        "test/**/*.test.ts ",
+        "-r",
+        "ts-node/register",
+        "--colors",
+        "--exit",
+      ],
+      "cwd": "${workspaceFolder}",
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen",
+      "protocol": "inspector",
+      "env": {
+        "NODE_ENV": "test",
+        "RABBIT_URI": "amqp://guest:guest@localhost",
+      }
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Mocha One",
+      "program": "${workspaceFolder}/node_modules/mocha/bin/_mocha",
+      "args": [
+        "-r",
+        "ts-node/register",
+        "--timeout",
+        "999999",
+        "--colors",
+        "${file}",
+      ],
+      "env": {
+        "NODE_ENV": "test"
+      },
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen",
+      "protocol": "inspector",
+    },
+    {
+      "type": "node",
+      "name": "Mocha Explorer",
+      "request": "launch",
+      "sourceMaps": false,
+      "program": "${workspaceFolder}/node_modules/mocha/bin/_mocha",
+      "args": [
+        "-r",
+        "ts-node/register",
+        "--colors",
+        "--exit",
+        "${file}"
+      ],
+      "cwd": "${workspaceFolder}",
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen",
+      "protocol": "inspector",
+      "env": {
+        "NODE_ENV": "test",
+        "RABBIT_URI": "amqp://guest:guest@localhost"
+      }
+    }
+  ]
+}
