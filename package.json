@@ -29,7 +29,7 @@
     "typescript": "4.3.5"
   },
   "scripts": {
-    "start": "node dist/src/index.js",
+    "start": "ts-node src/index.ts",
     "dev": "NODE_ENV=development node dist/src/index.js",
     "predev": "yarn run build:only",
     "build:only": "yarn run clean:dist && tsc -p tsconfig.json --pretty",
@@ -39,5 +39,10 @@
     "test:coverage": " NODE_ENV=test nyc --reporter=text --reporter=lcov npm run test:all",
     "lint": "eslint --ext .ts .",
     "clean:dist": "rm -rf dist/"
+  },
+  "dependencies": {
+    "@types/pdfkit": "0.12.9",
+    "canvas": "2.11.2",
+    "pdfkit": "0.13.0"
   }
 }
